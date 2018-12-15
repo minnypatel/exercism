@@ -19,7 +19,7 @@ const transformUnits = (unitsInteger) => {
     case 9:
       return 'IX';
     default:
-      return 'ERROR';
+      return '';
   }
 };
 
@@ -44,16 +44,57 @@ const transformTens = (tensInteger) => {
     case 9:
       return 'XC';
     default:
-      return 'ERROR';
+      return '';
   }
 };
 
+const transformHundreds = (hundredsInteger) => {
+  switch (hundredsInteger) {
+    case 1:
+      return 'C';
+    case 2:
+      return 'CC';
+    case 3:
+      return 'CCC';
+    case 4:
+      return 'CD';
+    case 5:
+      return 'D';
+    case 6:
+      return 'DC';
+    case 7:
+      return 'DCC';
+    case 8:
+      return 'DCCC';
+    case 9:
+      return 'CM';
+    default:
+      return '';
+  }
+};
+
+const transformThousands = (thousandsInteger) => {
+  switch (thousandsInteger) {
+    case 1:
+      return 'M';
+    case 2:
+      return 'MM';
+    case 3:
+      return 'MMM';
+    default:
+      return '';
+  }
+};
+
+// Might be able to do this better with a reversed map, guarding against
+// non-existent values in the array
 export const toRoman = (integerToTransform) => {
   const arrayOfInts = String(integerToTransform).split('').map(Number);
-  const foo = arrayOfInts.pop();
-  const moo = transformUnits(foo);
-  const woo = arrayOfInts.pop();
-  const loo = transformTens(woo);
+  const romanUnits = transformUnits(arrayOfInts[arrayOfInts.length - 1]);
+  const romanTens = transformTens(arrayOfInts[arrayOfInts.length - 2]);
+  const romanHundreds = transformHundreds(arrayOfInts[arrayOfInts.length - 3]);
+  const romanThousands = transformThousands(arrayOfInts[arrayOfInts.length - 4]);
 
-  return loo.concat(moo);
+  // could use .concat() but '+' works and is more readable
+  return romanThousands + romanHundreds + romanTens + romanUnits;
 };
