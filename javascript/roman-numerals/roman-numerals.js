@@ -1,100 +1,62 @@
-const transformUnits = (unitsInteger) => {
-  switch (unitsInteger) {
-    case 1:
-      return 'I';
-    case 2:
-      return 'II';
-    case 3:
-      return 'III';
-    case 4:
-      return 'IV';
-    case 5:
-      return 'V';
-    case 6:
-      return 'VI';
-    case 7:
-      return 'VII';
-    case 8:
-      return 'VIII';
-    case 9:
-      return 'IX';
-    default:
-      return '';
-  }
-};
+const transformUnitsMap = new Map([
+  ['1', 'I'],
+  ['2', 'II'],
+  ['3', 'III'],
+  ['4', 'IV'],
+  ['5', 'V'],
+  ['6', 'VI'],
+  ['7', 'VII'],
+  ['8', 'VIII'],
+  ['9', 'IX'],
+  [undefined, ''],
+  [0, ''],
+]);
 
-const transformTens = (tensInteger) => {
-  switch (tensInteger) {
-    case 1:
-      return 'X';
-    case 2:
-      return 'XX';
-    case 3:
-      return 'XXX';
-    case 4:
-      return 'XL';
-    case 5:
-      return 'L';
-    case 6:
-      return 'LX';
-    case 7:
-      return 'LXX';
-    case 8:
-      return 'LXXX';
-    case 9:
-      return 'XC';
-    default:
-      return '';
-  }
-};
+const transformTensMap = new Map([
+  ['1', 'X'],
+  ['2', 'XX'],
+  ['3', 'XXX'],
+  ['4', 'XL'],
+  ['5', 'L'],
+  ['6', 'LX'],
+  ['7', 'LXX'],
+  ['8', 'LXXX'],
+  ['9', 'XC'],
+  [undefined, ''],
+  [0, ''],
+]);
 
-const transformHundreds = (hundredsInteger) => {
-  switch (hundredsInteger) {
-    case 1:
-      return 'C';
-    case 2:
-      return 'CC';
-    case 3:
-      return 'CCC';
-    case 4:
-      return 'CD';
-    case 5:
-      return 'D';
-    case 6:
-      return 'DC';
-    case 7:
-      return 'DCC';
-    case 8:
-      return 'DCCC';
-    case 9:
-      return 'CM';
-    default:
-      return '';
-  }
-};
+const transformHundredsMap = new Map([
+  ['1', 'C'],
+  ['2', 'CC'],
+  ['3', 'CCC'],
+  ['4', 'CD'],
+  ['5', 'D'],
+  ['6', 'DX'],
+  ['7', 'DCC'],
+  ['8', 'DCCC'],
+  ['9', 'CM'],
+  [undefined, ''],
+  [0, ''],
+]);
 
-const transformThousands = (thousandsInteger) => {
-  switch (thousandsInteger) {
-    case 1:
-      return 'M';
-    case 2:
-      return 'MM';
-    case 3:
-      return 'MMM';
-    default:
-      return '';
-  }
-};
+const transformThousandsMap = new Map([
+  ['1', 'M'],
+  ['2', 'MM'],
+  ['3', 'MMM'],
+  [undefined, ''],
+  [0, ''],
+]);
 
 // Might be able to do this better with a reversed map, guarding against
 // non-existent values in the array
 export const toRoman = (integerToTransform) => {
-  const arrayOfInts = String(integerToTransform).split('').map(Number);
-  const romanUnits = transformUnits(arrayOfInts[arrayOfInts.length - 1]);
-  const romanTens = transformTens(arrayOfInts[arrayOfInts.length - 2]);
-  const romanHundreds = transformHundreds(arrayOfInts[arrayOfInts.length - 3]);
-  const romanThousands = transformThousands(arrayOfInts[arrayOfInts.length - 4]);
+  const integerSplitIntoArray = String(integerToTransform).split('');
+  const romanUnits = transformUnitsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 1]);
+  const romanTens = transformTensMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 2]);
+  const romanHundreds = transformHundredsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 3]);
+  const romanThousands = transformThousandsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 4]);
 
-  // could use .concat() but '+' works and is more readable
+  // falsey values break it
   return romanThousands + romanHundreds + romanTens + romanUnits;
 };
