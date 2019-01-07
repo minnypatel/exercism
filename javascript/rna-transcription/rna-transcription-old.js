@@ -8,11 +8,13 @@ export const toRna = (dnaStrand) => {
 
   const dnaArray = dnaStrand.split('');
 
-  const invalidInput = () => {
-    throw new Error('Invalid input DNA.');
-  };
-
-  const rnaArray = dnaArray.map(char => transcribeDnaMap.get(char) || invalidInput());
+  const rnaArray = dnaArray.map((x) => {
+    const rnaComplement = transcribeDnaMap.get(x);
+    if (rnaComplement === undefined) {
+      throw new Error('Invalid input DNA.');
+    }
+    return rnaComplement;
+  });
 
   const rnaString = rnaArray.join('');
 
