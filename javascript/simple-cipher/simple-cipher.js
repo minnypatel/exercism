@@ -1,13 +1,16 @@
-const Cipher = (inputChar) => {
-  const alphabetArray = ['a', 'b', 'c', 'd', 'e'];
+const Cipher = (inputString) => {
+  const alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+  const inputChars = inputString.split('');
 
-  // find inputChar in alphabetArray
-  // count 4 along the array and return as outputChar
-  // wrapper function to split and join multiple char input
+  const foo = inputChars.map((char) => {
+    const charIndex = alphabetArray.indexOf(char);
+    const outputCharIndex = charIndex + 3;
+    const outputChar = alphabetArray[outputCharIndex];
+    return outputChar;
+  });
 
-  const inputCharIndex = alphabetArray.indexOf(inputChar);
-  const outputCharIndex = inputCharIndex + 4;
-  return outputCharIndex;
+  const moo = foo.join('');
+  return moo;
 };
 
-console.log(Cipher('a'));
+console.log(Cipher('bad'));
