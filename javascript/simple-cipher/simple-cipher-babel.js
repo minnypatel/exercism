@@ -1,3 +1,5 @@
+'use strict';
+
 /*eslint class-methods-use-this: ["error", { "exceptMethods": ["encode"] }] */
 
 // const Cipher = (inputString, instruction) => {
