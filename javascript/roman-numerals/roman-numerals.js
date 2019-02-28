@@ -8,8 +8,8 @@ const transformUnitsMap = new Map([
   ['7', 'VII'],
   ['8', 'VIII'],
   ['9', 'IX'],
+  ['0', ''],
   [undefined, ''],
-  [0, ''],
 ]);
 
 const transformTensMap = new Map([
@@ -22,8 +22,8 @@ const transformTensMap = new Map([
   ['7', 'LXX'],
   ['8', 'LXXX'],
   ['9', 'XC'],
+  ['0', ''],
   [undefined, ''],
-  [0, ''],
 ]);
 
 const transformHundredsMap = new Map([
@@ -36,20 +36,19 @@ const transformHundredsMap = new Map([
   ['7', 'DCC'],
   ['8', 'DCCC'],
   ['9', 'CM'],
+  ['0', ''],
   [undefined, ''],
-  [0, ''],
 ]);
 
 const transformThousandsMap = new Map([
   ['1', 'M'],
   ['2', 'MM'],
   ['3', 'MMM'],
+  ['0', ''],
   [undefined, ''],
-  [0, ''],
 ]);
 
-// Might be able to do this better with a reversed map, guarding against
-// non-existent values in the array
+// I don't like how I'm doing this but can't get my head round a better solution at the moment
 export const toRoman = (integerToTransform) => {
   const integerSplitIntoArray = String(integerToTransform).split('');
   const romanUnits = transformUnitsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 1]);
@@ -57,6 +56,5 @@ export const toRoman = (integerToTransform) => {
   const romanHundreds = transformHundredsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 3]);
   const romanThousands = transformThousandsMap.get(integerSplitIntoArray[integerSplitIntoArray.length - 4]);
 
-  // falsey values break it
   return romanThousands + romanHundreds + romanTens + romanUnits;
 };
