@@ -5,11 +5,11 @@ describe('run-length encode a string', () => {
     expect(encode('')).toEqual('');
   });
 
-  xtest('single characters only are encoded without count', () => {
+  test('single characters only are encoded without count', () => {
     expect(encode('XYZ')).toEqual('XYZ');
   });
 
-  xtest('encode string with no single characters', () => {
+  test.only('encode string with no single characters', () => {
     expect(encode('AABBBCCCC')).toEqual('2A3B4C');
   });
 
