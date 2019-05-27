@@ -11,8 +11,6 @@ export const COLORS = [
   "white"
 ];
 
-console.log(COLORS);
-
-// export const colorCode = () => {
-//   COLORS.map(foo => foo);
-// };
+export const colorCode = (input) => {
+  return COLORS.findIndex(foo => foo === input);
+};
