@@ -3,14 +3,14 @@ export const COLORS = [
   "brown",
   "red",
   "orange",
-  "yellow"
-  ,"green",
+  "yellow",
+  "green",
   "blue",
   "violet",
   "grey",
   "white"
 ];
 
-export const colorCode = (input) => {
-  return COLORS.findIndex(foo => foo === input);
+export const colorCode = (color) => {
+  return COLORS.indexOf(color);
 };
