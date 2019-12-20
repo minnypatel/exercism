@@ -9,12 +9,14 @@ describe('run-length encode a string', () => {
     expect(encode('XYZ')).toEqual('XYZ');
   });
 
-  test.only('encode string with no single characters', () => {
+  test('encode string with no single characters', () => {
     expect(encode('AABBBCCCC')).toEqual('2A3B4C');
   });
 
   xtest('encode string with single characters mixed with repeated characters', () => {
-    expect(encode('WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB')).toEqual('12WB12W3B24WB');
+    expect(
+      encode('WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB')
+    ).toEqual('12WB12W3B24WB');
   });
 
   xtest('encode string with multiple whitespaces', () => {
@@ -40,7 +42,9 @@ describe('run-length decode a string', () => {
   });
 
   xtest('decode string with single characters mixed with repeated characters', () => {
-    expect(decode('12WB12W3B24WB')).toEqual('WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB');
+    expect(decode('12WB12W3B24WB')).toEqual(
+      'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB'
+    );
   });
 
   xtest('decode string with multiple whitespaces', () => {

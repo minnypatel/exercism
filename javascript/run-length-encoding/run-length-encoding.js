@@ -1,14 +1,23 @@
-export const encode = (inputString) => {
+export const encode = inputString => {
   const inputArray = inputString.split('');
   let count = 1;
 
-  const foo = (inputArray, char) => {
-    const moo = inputArray.indexOf(char);
-    console.log({moo});
-    // if (char === inputArray
-  }
+  const foo = (char, index, array) => {
+    const nextCharIndex = index + 1;
+    const nextChar = array[nextCharIndex];
 
-  const outputArray = inputArray.map(char => foo(inputArray, char));
+    if (char === nextChar) {
+      count++;
+    } else {
+      const encoded = count + char;
+      count = 1;
+      return encoded;
+    }
+  };
+
+  const outputArray = inputArray.map((char, index, array) =>
+    foo(char, index, array)
+  );
   const outputString = outputArray.join('');
   return outputString;
 };
