@@ -15,11 +15,32 @@ export const encode = inputString => {
     }
   };
 
-  const outputArray = inputArray.map((char, index, array) =>
+  const getOutputArray = inputArray.map((char, index, array) =>
     encodeChars(char, index, array)
   );
-  const outputString = outputArray.join('');
-  return outputString;
+
+  return getOutputArray.join('');
 };
 
-export const decode = () => {};
+export const decode = inputString => {
+  const inputArray = inputString.split('');
+
+  const decodeChars = (char, index) => {
+    if (isNaN(Number(char))) {
+
+      console.log("it's a string");
+    } else {
+      console.log("it's a number");
+    }
+  };
+
+  const getOutputArray = inputArray.map((char, index) =>
+    decodeChars(char, index)
+  );
+
+  return getOutputArray.join('');
+
+  // if char is a number, look to next char and print that many items of that char
+  // if char is a letter, check the previous is a letter
+  //    if so, return, if not, do nothing.
+};
